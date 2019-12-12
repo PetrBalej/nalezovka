@@ -1,0 +1,6 @@
+-- Vymyslete a vepiště níže vlastní SQL dotaz, který bude zajímavým způsobem pomocí prostorových fukncí filtrovat body nálezů z Vašeho území.
+-- V SELECTu musí být povinně použity tyto položky:
+-- gbifID, scientificName, ST_AsText(souradnice) AS souradniceWKT
+-- Navržený dotaz bude povinně bude využívat alespoň jednu ST_ funkci z každého z těchto dvou odkazů: 
+-- https://mariadb.com/kb/en/library/geometry-relations/ a https://mariadb.com/kb/en/library/geometry-constructors/
+-- Zdůvodněte zde do poznámky, co je cílem Vámi navrhnutého SQL dotazu.

@@ -1,0 +1,11 @@
+-- Níže vložte SQL dotaz, jehož cílem je získání centroidu z obálky všech záznamů (pro zobrazení středu mapy na webu) z tabulky event
+-- Postupně na sebe budete "nabalovat" (uzavírat do sebe) náeledující funkce v uvedeném pořadí nad sloupcem souradnice:
+-- 1) sloupec souradnice vložte do ST_AsText: ST_AsText(souradnice)
+-- 2) výraz z bodu 1) vložte do GROUP_CONCAT(): GROUP_CONCAT(ST_AsText(souradnice))
+-- 3) výraz z bodu 2) vložte do ST_GeomFromText(): následující body již doplňte sami podle předchozího vzoru
+-- 4) výraz z bodu 3) vložte do ST_Envelope(): ...
+-- 5) výraz z bodu 4) vložte do ST_Centroid(): ...
+-- 6) výraz z bodu 5) vložte do ST_AsText: ...
+-- 7) výraz z bodu 6) použijte do SELECTu a nastavte mu alias: AS stred
+-- 8) dokončete SQL dotaz z bodu 7) přidáním tabulky: FROM event
+

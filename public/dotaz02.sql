@@ -1,0 +1,5 @@
+-- Níže zapište tento SQL dotaz:
+-- SELECT bude obsahovat: *, ST_AsText(souradnice) AS souradniceWKT
+-- ve FROM budete přes INNER JOIN spojovat:
+--  1)  tabulku event s tabulkou occurrence přes event.gbifID=occurrence.event_gbifID
+--  2)  a následně  tabulku occurence s tabulkou taxon přes occurrence.taxon_taxonKey=taxon.taxonKey 
