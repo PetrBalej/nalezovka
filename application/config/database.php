@@ -73,9 +73,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+/* 
+ * Je-li v rámci WAMP serveru nainstalována zároveň MySQL i MariaDB je třeba pro 
+ * připojení k MariaDB zadat i port (3307) do hostname (viz konfig. pole níže):
+ *  'hostname' => 'localhost:3307' 
+ * (MySQL použije automaticky výchozí port (3306), ikdyž není vyplněn.)
+ * 
+ */
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => 'localhost', /* 'localhost:cislo_portu' */
 	'username' => 'root',
 	'password' => 'heslo',
 	'database' => 'geodb',
