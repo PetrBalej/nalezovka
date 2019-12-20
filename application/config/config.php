@@ -23,7 +23,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+
+if(!in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', "::1"))){
+    // nastavení adresy vzdáleného serveru
+    $config['base_url'] = "http://" . $_SERVER['HTTP_HOST'] . (trim($_SERVER['SCRIPT_NAME'], "index.php"));
+}else{
+    // původní možnost
+    $config['base_url'] = '';   
+}
+
+
 
 /*
 |--------------------------------------------------------------------------
