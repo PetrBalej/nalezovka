@@ -42,7 +42,7 @@ class Detail extends MY_Controller {
         $template = array('table_open' => '<table class="table table-bordered table-sm table-responsive" style="font-size: 70%;">');
         $this->table->set_template($template);
         
-        $data['okolni'] = $this->table->generate($okolni);
+        $data['okolni'] = $this->table->generate(GBIF_hypertext_all($okolni));
 
 
 

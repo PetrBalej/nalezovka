@@ -89,6 +89,15 @@ function GBIF_hypertext($array = array()) {
     return $array;
 }
 
+// úprava hodnot z řádků GBIF
+function GBIF_hypertext_all($array = array()) {
+
+    foreach ($array as $key => $row) {
+        $array[$key] =  GBIF_hypertext($row);
+    }
+    return $array;
+}
+
 // převod jednoho řádku pole do jednoduché tabulky s páry: klíč | hodnota
 function GBIF_array_row_table($array = array(), $table_atr = "class='trida' style=''", $GBIF_hypertext = TRUE) {
 

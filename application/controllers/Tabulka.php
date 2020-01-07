@@ -81,7 +81,7 @@ class Tabulka extends MY_Controller {
         $template = array('table_open' => '<table class="table table-bordered table-sm table-responsive" style="font-size: 70%;">');
         $this->table->set_template($template);
 
-        $data['tabulka'] = $this->table->generate($nalezy);
+        $data['tabulka'] = $this->table->generate(GBIF_hypertext_all($nalezy));
 
 
 
