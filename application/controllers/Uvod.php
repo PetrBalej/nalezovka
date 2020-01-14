@@ -44,7 +44,8 @@ class Uvod extends MY_Controller {
 
 
         // výběr záznamů (případně omezený taxonem)
-        $query = $this->db->query($this->public_sql[2] . $where . ' LIMIT 0,100000');
+        $sql_prep = explode("*", trim_sql_comments($this->public_sql[2]), 2); // optimalizace, následně výběr jen dvou sloupců místo *
+        $query = $this->db->query('SELECT gbifID, scientificName' . $sql_prep[1] . $where . ' LIMIT 0,100000');
         $nalezy = $query->result_array();
 
         $data['pocet_nalezu'] = $query->num_rows();
@@ -63,7 +64,7 @@ class Uvod extends MY_Controller {
             $geojson .= '{"type": "Feature", "geometry":';
             $point = geoPHP::load($row['souradniceWKT'], 'wkt');
             $geojson .= $point->out('json');
-            $geojson .= ',"properties": {"speciesName": "<a href=\"/nalezovka/index.php/detail/index/' . $row['gbifID'] . '\" target=\"_blank\">' . $row['scientificName'] . ' (gbifID: ' . $row['gbifID'] . ')</a>"}},';
+            $geojson .= ',"properties": {"speciesName": "<a href=\"/nalezovka/index.php/detail/index/' . $row['gbifID'] . '\" target=\"_blank\">' . $row['scientificName'] . ' (gbifID: ' . $row['gbifID'] . ')</a>"}},' . PHP_EOL;
         }
         $geojson .= ']}';
 

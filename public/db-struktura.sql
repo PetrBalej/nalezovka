@@ -58,7 +58,9 @@ CREATE TABLE IF NOT EXISTS `occurrence` (
   `recordedBy` varchar(50) NOT NULL,
   `issue` varchar(250) NOT NULL,
   `taxon_taxonKey` int(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `event_gbifID` (`event_gbifID`),
+  KEY `taxon_taxonKey` (`taxon_taxonKey`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
