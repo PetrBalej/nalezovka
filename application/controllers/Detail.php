@@ -31,7 +31,7 @@ class Detail extends MY_Controller {
         }
 
         // výběr záznamů v okolí aktuálně zobrazovaného nálezu, úprava dotazu č. 2   
-        $sql_add = str_replace("FROM", ", " . trim_sql_comments($this->public_sql[4]) . "(ST_PointFromText('" . $nalez['souradniceWKT'] . "'), souradnice) AS distance FROM ", trim_sql_comments($this->public_sql[2]));
+        $sql_add = str_ireplace(" FROM ", ", " . trim_sql_comments($this->public_sql[4]) . "(ST_PointFromText('" . $nalez['souradniceWKT'] . "'), souradnice) AS distance FROM ", trim_sql_comments($this->public_sql[2]));
         $query = $this->db->query($sql_add . " WHERE gbifID != " . $this->db->escape($gbifID) . " ORDER BY distance LIMIT 10");
 
         $data['okolni_sql'] = $this->db->last_query();
