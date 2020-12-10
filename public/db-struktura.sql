@@ -84,4 +84,34 @@ CREATE TABLE IF NOT EXISTS `taxon` (
   `speciesKey` int(12) DEFAULT NULL,
   PRIMARY KEY (`taxonKey`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-COMMIT;
+
+
+-- --------------------------------------------------------
+
+--
+-- Minimální povinná struktura tabulky `reky`
+--
+text NOT NULL
+
+DROP TABLE IF EXISTS `reky`;
+CREATE TABLE IF NOT EXISTS `reky` (
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `name` varchar(500) DEFAULT NULL,
+  `geo_line` multilinestring NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Minimální povinná struktura tabulky `jezera`
+--
+
+DROP TABLE IF EXISTS `jezera`;
+CREATE TABLE IF NOT EXISTS `jezera` (
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `name` varchar(14) DEFAULT NULL,
+  `geo_poly` multipolygon NOT NULL,
+
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

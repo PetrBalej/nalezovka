@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 </div>
 </main>
 
@@ -167,7 +167,7 @@
 </script>    
 
 
-<?php if ($this->router->fetch_class() == "uvod" OR $this->router->fetch_class() == "nej" OR $this->router->fetch_class() == "prostor") { ?>
+<?php if ($this->router->fetch_class() == "uvod" or $this->router->fetch_class() == "nej" or $this->router->fetch_class() == "prostor" or $this->router->fetch_class() == "reky" or $this->router->fetch_class() == "jezera") { ?>
     <!-- leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script src="https://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
@@ -185,6 +185,25 @@
     }).addTo(mymap);
 
 
+
+<?php $oblast = file_get_contents('public/oblast.geojson'); ?>
+    var oblast = <?php if (json_decode($oblast)) {
+    echo $oblast;
+}  ?>;
+            L.geoJSON(oblast).addTo(mymap);
+
+<?php $reky = file_get_contents('public/reky.geojson'); ?>
+    var reky = <?php if (json_decode($reky)) {
+    echo $reky;
+}  ?>;
+            L.geoJSON(reky).addTo(mymap);
+
+<?php $jezera = file_get_contents('public/jezera.geojson'); ?>
+    var jezera = <?php if (json_decode($jezera)) {
+    echo $jezera;
+}  ?>;
+            L.geoJSON(jezera).addTo(mymap);
+
     var data = <?php echo $geojson; ?>;
 
     <?php if ($this->router->fetch_class() == "prostor") { ?>
@@ -201,7 +220,35 @@
        
     <?php } ?>
 
-    <?php if ($this->router->fetch_class() == "uvod" OR $this->router->fetch_class() == "nej") { ?>
+    <?php if ($this->router->fetch_class() == "jezera") { ?>
+        L.geoJson(data, {
+            /*
+             style: function (feature) {
+             return {color: feature.properties.color};
+             },
+             */
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(feature.properties.speciesName);
+            }
+        }).addTo(mymap);
+       
+    <?php } ?>
+
+    <?php if ($this->router->fetch_class() == "reky") { ?>
+        L.geoJson(data, {
+            /*
+             style: function (feature) {
+             return {color: feature.properties.color};
+             },
+             */
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(feature.properties.speciesName);
+            }
+        }).addTo(mymap);
+       
+    <?php } ?>
+
+    <?php if ($this->router->fetch_class() == "uvod" or $this->router->fetch_class() == "nej") { ?>
         var markers = L.markerClusterGroup();
 
         var geoJsonLayer = L.geoJson(data, {

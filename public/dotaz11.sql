@@ -1,0 +1,4 @@
+-- Vymyslete a vepiště níže vlastní SQL dotaz, který bude zajímavým způsobem pomocí prostorových fukncí filtrovat body nálezů vůči liniím řek z tabulky reky
+-- V SELECTu musí být povinně použity tyto položky:
+-- gbifID, scientificName, ST_AsText(souradnice) AS souradniceWKT, souradnice, geo_line
+-- Zdůvodněte zde do poznámky, co je cílem Vámi navrhnutého SQL dotazu.

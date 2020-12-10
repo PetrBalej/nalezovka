@@ -110,6 +110,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/nalezovka/index.php/prostor">Prostor</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/nalezovka/index.php/jezera">Jezera</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/nalezovka/index.php/reky">Řeky</a>
+                        </li>
+
+                    
                     </ul>
                 </div>
             </nav>
