@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `taxon` (
 --
 -- Minimální povinná struktura tabulky `reky`
 --
-text NOT NULL
+
 
 DROP TABLE IF EXISTS `reky`;
 CREATE TABLE IF NOT EXISTS `reky` (
