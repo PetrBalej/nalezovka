@@ -15,7 +15,7 @@ class Import extends MY_Controller
             $col_type = '/([A-z]+)(\(([0-9\,]+)\))?/i';
             foreach ($ts as $item) {
                 preg_match($col_type, $item['Type'], $m);
-                $m[3] = $m[3] ?? null;
+                $m[3] = isset($m[3]) ? $m[3] : null; // $m[3] ?? null; // nelze na PHP < 7 (Win7)
                 $tables_col_types[$t][$item['Field']] = array($m[1], $m[3]);
             }
         }
@@ -64,7 +64,6 @@ class Import extends MY_Controller
                     $tk[] = $row['taxonKey'];
                 }
             }
-          
         }
     }
 }
