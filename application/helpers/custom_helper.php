@@ -194,12 +194,10 @@ function validate_query_result($sqls, $sqls_selected = array())
 // ošetření vstupů z GBIF simple csv
 function GBIF_prepare($col_name, $csv_row, $table_col_types)
 {
-
     $value = $csv_row[$col_name];
 
 
     if ($col_name == "gbifID" and isset($table_col_types["event_gbifID"])) {
-        
         $col_name = "event_gbifID";
     }
     if ($col_name == "taxonKey" and isset($table_col_types["taxon_taxonKey"])) {
@@ -221,5 +219,5 @@ function GBIF_prepare($col_name, $csv_row, $table_col_types)
     }
 
 
-    return $res_value;
+    return htmlspecialchars($res_value, ENT_QUOTES);
 }
