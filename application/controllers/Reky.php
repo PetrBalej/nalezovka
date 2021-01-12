@@ -1,20 +1,22 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Reky extends MY_Controller {
-
-    public function __construct() {
+class Reky extends MY_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
-        validate_query_result($this->public_sql, Array(11));
+        validate_query_result($this->public_sql, array(11));
     }
 
-    public function index($id = NULL) {
+    public function index($id = null)
+    {
 
 
 
 
-        // výběr záznamů 
+        // výběr záznamů
         $query = $this->db->query(trim_sql_comments($this->public_sql[11]));
         $nalezy = $query->result_array();
         $data['vybrane_sql'] = $this->db->last_query();
@@ -43,13 +45,12 @@ class Reky extends MY_Controller {
 
         // získání obálky a následně centroidu ze všech souřadnic v tabulce event
 
-
-        $sql_add = str_ireplace(" FROM ", ", ST_AsText(ST_Centroid(ST_Envelope(ST_GeomFromText(GROUP_CONCAT(ST_AsText(souradnice)))))) AS stred FROM ", trim_sql_comments($this->public_sql[9]));
+        $sql_add = preg_replace("/ FROM /m", ", ST_AsText(ST_Centroid(ST_Envelope(ST_GeomFromText(GROUP_CONCAT(ST_AsText(souradnice)))))) AS stred FROM ", trim_sql_comments($this->public_sql[11]));
         $query = $this->db->query($sql_add);
         $row = $query->row_array();
 
 
-        if (isset($row) AND ! is_null($row['stred'])) {
+        if (isset($row) and ! is_null($row['stred'])) {
             $point = geoPHP::load($row['stred'], 'wkt');
             $centX = $point->getX();
             $centY = $point->getY();
@@ -63,5 +64,4 @@ class Reky extends MY_Controller {
         $this->load->view('reky_view', $data);
         $this->load->view('zaklad_konec_view', $data);
     }
-
 }
