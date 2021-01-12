@@ -23,5 +23,6 @@ class My_Controller extends CI_Controller
         }
 
         $this->db->query("SET group_concat_max_len = 1000000"); // na Webzdarma omezeno na 1024...
+        $this->db->query("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))"); // na Webzdarma striktně ONLY_FULL_GROUP_BY, nutno vypnout
     }
 }
