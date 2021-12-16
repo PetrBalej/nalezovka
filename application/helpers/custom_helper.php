@@ -145,15 +145,15 @@ function validate_query_result($sqls, $sqls_selected = array())
     foreach ($sqls as $key => $value) {
         if ($key == 4) {
             if (strtolower(trim_sql_comments($value)) != "st_distance") {
-                show_error("<p>Není zadána (správná) SQL funkce pro zjištění vzdálenosti mezi dvěma geometriemi!</p><p>Dotaz použit v rámci controlleru: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Chyba v SQL dotazu č. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                show_error("<p>The (correct) SQL function for determining the distance between two geometries is not specified!</p><p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
         } elseif ($key == 5 or $key == 6 or $key == 7 or $key == 8) {
             if (substr(trim(strtolower(trim_sql_comments($value))), 0, 8) != "order by") {
-                show_error("<p>Není zadána (správná) SQL funkce pro zjištění NEJ- souřadnice!</p><p>Dotaz použit v rámci controlleru: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Chyba v SQL dotazu č. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                show_error("<p>The (correct) SQL function for finding The MOST- (N/S/E/W) coordinate is not specified!</p><p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
 
             if (!$CI->db->simple_query(trim_sql_comments($CI->public_sql[2] . " " . trim_sql_comments($value)))) {
-                show_error("<p>Není zadána (správná) SQL funkce pro zjištění NEJ- souřadnice!</p>" . "<b>SQL:</b><code>" . $value . "</code>" . "<b>Error:</b><code>" . print_r($CI->db->error(), true) . "</code>" . "<p>Dotaz použit v rámci controlleru: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Chyba v SQL dotazu č. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                show_error("<p>The (correct) SQL function for finding The MOST- (N/S/E/W) coordinate is not specified!</p>" . "<b>SQL:</b><code>" . $value . "</code>" . "<b>Error:</b><code>" . print_r($CI->db->error(), true) . "</code>" . "<p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
 
             $missing = explode("|", $k[$key]);
@@ -166,12 +166,12 @@ function validate_query_result($sqls, $sqls_selected = array())
                 }
             }
             if (!empty($missing_matched)) {
-                show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>V SQL dotazu chybí některý z níže uvedených atributů/výrazů:</b><code>" . implode(", ", $missing_matched) . "</code>", 404, "Chyba v SQL dotazu č. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>One of the following attributes / expressions is missing in the SQL query:</b><code>" . implode(", ", $missing_matched) . "</code>", 404, "Error in SQL query no. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
         } else {
             if (!empty(trim_sql_comments($value))) {
                 if (!$CI->db->simple_query(trim_sql_comments($value))) {
-                    show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>Error:</b><code>" . print_r($CI->db->error(), true) . "</code>" . "<p>Dotaz použit v rámci controlleru: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Chyba v SQL dotazu č. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                    show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>Error:</b><code>" . print_r($CI->db->error(), true) . "</code>" . "<p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
                 }
             }
             $missing = explode("|", $k[$key]);
@@ -184,7 +184,7 @@ function validate_query_result($sqls, $sqls_selected = array())
                 }
             }
             if (!empty($missing_matched)) {
-                show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>V SQL dotazu chybí některý z níže uvedených atributů/výrazů:</b><code>" . implode(", ", $missing_matched) . "</code>", 404, "Chyba v SQL dotazu č. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>One of the following attributes / expressions is missing in the SQL query:</b><code>" . implode(", ", $missing_matched) . "</code>", 404, "Error in SQL query no. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
         }
     }
