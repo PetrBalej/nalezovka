@@ -20,8 +20,8 @@ class Import extends MY_Controller
             }
         }
        
-        // exportovaný Simple soubor z GBIFu uložený ve složce "public" a pojmenovaný "gbif-sumava.csv"
-        $gbif_simple = FCPATH . 'public/gbif-sumava.csv';
+        // exportovaný Simple soubor z GBIFu uložený ve složce "public" a pojmenovaný "gbif-simple.csv"
+        $gbif_simple = FCPATH . 'public/gbif-simple.csv';
 
 
 

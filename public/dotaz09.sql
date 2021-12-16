@@ -1,4 +1,6 @@
--- Vymyslete a vepiště níže vlastní SQL dotaz, který bude zajímavým způsobem pomocí prostorových fukncí filtrovat body nálezů z Vašeho území. 
+-- Vymyslete a vepiště níže vlastní SQL dotaz, který bude zajímavým způsobem 
+-- (!!!dotazy 09, 10, 11 budou významově originální, ne jen vzájemné doplňky!!!)
+-- pomocí prostorových fukncí filtrovat body nálezů z Vašeho území. 
 -- Nápověda: můžete si definovat a vkládat do WHERE dotazu i vlastní geometrie třeba pomocí ST_GeometryFromText
 -- V SELECTu musí být povinně použity tyto položky:
 -- gbifID, scientificName, ST_AsText(souradnice) AS souradniceWKT
