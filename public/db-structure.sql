@@ -13,13 +13,13 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 --
--- Databáze: `geodb`
+-- Database: `geodb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `event`
+-- Table `event`
 --
 
 DROP TABLE IF EXISTS `event`;
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `event` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `occurrence`
+-- Table `occurrence`
 --
 
 DROP TABLE IF EXISTS `occurrence`;
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `occurrence` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `taxon`
+-- Table `taxon`
 --
 
 DROP TABLE IF EXISTS `taxon`;
@@ -89,12 +89,12 @@ CREATE TABLE IF NOT EXISTS `taxon` (
 -- --------------------------------------------------------
 
 --
--- Minimální povinná struktura tabulky `reky`
+-- Minimum mandatory table structure `rivers`
 --
 
 
-DROP TABLE IF EXISTS `reky`;
-CREATE TABLE IF NOT EXISTS `reky` (
+DROP TABLE IF EXISTS `rivers`;
+CREATE TABLE IF NOT EXISTS `rivers` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `name` varchar(500) DEFAULT NULL,
   `geo_line` multilinestring NOT NULL,
@@ -104,11 +104,11 @@ CREATE TABLE IF NOT EXISTS `reky` (
 -- --------------------------------------------------------
 
 --
--- Minimální povinná struktura tabulky `jezera`
+-- Minimum mandatory table structure  `lakes`
 --
 
-DROP TABLE IF EXISTS `jezera`;
-CREATE TABLE IF NOT EXISTS `jezera` (
+DROP TABLE IF EXISTS `lakes`;
+CREATE TABLE IF NOT EXISTS `lakes` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `name` varchar(14) DEFAULT NULL,
   `geo_poly` multipolygon NOT NULL,

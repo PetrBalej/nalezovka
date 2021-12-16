@@ -190,7 +190,7 @@
 
 
 
-    <?php $oblast = @file_get_contents('public/oblast.geojson');
+    <?php $oblast = @file_get_contents('public/region.geojson');
     if ($oblast) {
         ?>
     var oblast =
@@ -202,7 +202,7 @@
 
     <?php
     } ?>
-    <?php $reky = file_get_contents('public/reky.geojson'); ?>
+    <?php $reky = file_get_contents('public/rivers.geojson'); ?>
     var reky =
         <?php if (json_decode($reky)) {
         echo $reky;
@@ -210,7 +210,7 @@
     ;
     L.geoJSON(reky).addTo(mymap);
 
-    <?php $jezera = file_get_contents('public/jezera.geojson'); ?>
+    <?php $jezera = file_get_contents('public/lakes.geojson'); ?>
     var jezera =
         <?php if (json_decode($jezera)) {
         echo $jezera;
