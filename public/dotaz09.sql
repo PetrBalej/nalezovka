@@ -1,9 +1,9 @@
--- Vymyslete a vepiště níže vlastní SQL dotaz, který bude zajímavým způsobem 
--- (!!!dotazy 09, 10, 11 budou významově originální, ne jen vzájemné doplňky!!!)
--- pomocí prostorových fukncí filtrovat body nálezů z Vašeho území. 
--- Nápověda: můžete si definovat a vkládat do WHERE dotazu i vlastní geometrie třeba pomocí ST_GeometryFromText
--- V SELECTu musí být povinně použity tyto položky:
--- gbifID, scientificName, ST_AsText(souradnice) AS souradniceWKT
--- Navržený dotaz bude povinně bude využívat alespoň jednu ST_ funkci z každého z těchto dvou odkazů: 
+-- Propose and enter your own SQL query below, which will be 
+-- (!!! queries 09, 10, 11 will be semantically different, not just mutual additions !!!) 
+-- using spatial functions to filter the points of occurrences from your region.
+-- Hint: you can define and insert your own geometry into the WHERE clause, for example using ST_GeometryFromText().
+-- The following items must be used in SELECT:
+-- gbifID, scientificName, ST_AsText(coordinates) AS coordinatesWKT
+-- The proposed query will be required to use at least one ST_ function from each of these two links:
 -- https://mariadb.com/kb/en/library/geometry-relations/ a https://mariadb.com/kb/en/library/geometry-constructors/
--- Zdůvodněte zde do poznámky, co je cílem Vámi navrhnutého SQL dotazu.
+-- Justify here in the note what is the goal of your proposed SQL query.

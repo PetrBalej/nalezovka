@@ -1,15 +1,17 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Detail extends MY_Controller {
-
-    public function __construct() {
+class Detail extends MY_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
-        validate_query_result($this->public_sql, Array(2,4));
+        validate_query_result($this->public_sql, array(2,4));
     }
 
-    public function index($gbifID = NULL) {
+    public function index($gbifID = null)
+    {
 
 
         // kontrola, je-li v parametru ID nálezu
@@ -17,21 +19,21 @@ class Detail extends MY_Controller {
             $where = " WHERE occurrence.event_gbifID=" . $this->db->escape($gbifID);
         } else {
             $where = " WHERE 0=1 ";
-            show_error("", 404, "Není vyplněn číselný parametr gbifID v URL!");
+            show_error("", 404, "The integer parameter gbifID in the URL is not filled in!");
         }
 
         // výběr záznamů podle ID nálezu
         $query = $this->db->query($this->public_sql[2] . $where . ' LIMIT 0,1');
         $nalez = $query->row_array();
-        // předání do view        
+        // předání do view
         $data['nalez'] = $nalez;
 
         if (empty($nalez)) {
-            show_error("", 404, "SQL dotaz vrátil prázdný výsledek: 0 záznamů!");
+            show_error("", 404, "SQL query returned empty result: 0 rows!");
         }
 
-        // výběr záznamů v okolí aktuálně zobrazovaného nálezu, úprava dotazu č. 2   
-        $sql_add = str_ireplace(" FROM ", ", " . trim_sql_comments($this->public_sql[4]) . "(ST_PointFromText('" . $nalez['souradniceWKT'] . "'), souradnice) AS distance FROM ", trim_sql_comments($this->public_sql[2]));
+        // výběr záznamů v okolí aktuálně zobrazovaného nálezu, úprava queryu č. 2
+        $sql_add = str_ireplace(" FROM ", ", " . trim_sql_comments($this->public_sql[4]) . "(ST_PointFromText('" . $nalez['coordinatesWKT'] . "'), coordinates) AS distance FROM ", trim_sql_comments($this->public_sql[2]));
         $query = $this->db->query($sql_add . " WHERE gbifID != " . $this->db->escape($gbifID) . " ORDER BY distance LIMIT 10");
 
         $data['okolni_sql'] = $this->db->last_query();
@@ -50,5 +52,4 @@ class Detail extends MY_Controller {
         $this->load->view('detail_view', $data);
         $this->load->view('zaklad_konec_view', $data);
     }
-
 }

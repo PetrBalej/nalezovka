@@ -1,15 +1,17 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Uvod extends MY_Controller {
-
-    public function __construct() {
+class Uvod extends MY_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
-        validate_query_result($this->public_sql, Array(1,2,3));
+        validate_query_result($this->public_sql, array(1,2,3));
     }
 
-    public function index($id = NULL) {
+    public function index($id = null)
+    {
 
 
 
@@ -20,15 +22,12 @@ class Uvod extends MY_Controller {
 
         // hodnota z roletového menu s taxony z formuláře, byl-li odeslán
         if (is_null($id)) {
-
             if (is_null($this->input->post('combobox'))) { // AND !empty($this->input->post('combobox'))
-                $data['combobox'] = NULL;
+                $data['combobox'] = null;
             } else {
-
                 redirect(site_url('uvod/index/' . $this->input->post('combobox')), 'auto', 302);
             }
         } else {
-
             $data['combobox'] = $id;
         }
 
@@ -51,7 +50,7 @@ class Uvod extends MY_Controller {
         $data['pocet_nalezu'] = $query->num_rows();
 
         if (empty($nalezy)) {
-            show_error("", 404, "SQL dotaz vrátil prázdný výsledek: 0 záznamů!");
+            show_error("", 404, "SQL query returned empty result: 0 rows!");
         }
 
         // načtení knihovny geoPHP
@@ -62,9 +61,9 @@ class Uvod extends MY_Controller {
 
         foreach ($nalezy as $row) {
             $geojson .= '{"type": "Feature", "geometry":';
-            $point = geoPHP::load($row['souradniceWKT'], 'wkt');
+            $point = geoPHP::load($row['coordinatesWKT'], 'wkt');
             $geojson .= $point->out('json');
-            $geojson .= ',"properties": {"speciesName": "<a href=\"/nalezovka/index.php/detail/index/' . $row['gbifID'] . '\" target=\"_blank\">' . $row['scientificName'] . ' (gbifID: ' . $row['gbifID'] . ')</a>"}},' . PHP_EOL;
+            $geojson .= ',"properties": {"speciesName": "<a href=\"' . site_url() . '/detail/index/' . $row['gbifID'] . '\" target=\"_blank\">' . $row['scientificName'] . ' (gbifID: ' . $row['gbifID'] . ')</a>"}},' . PHP_EOL;
         }
         $geojson .= ']}';
 
@@ -75,8 +74,8 @@ class Uvod extends MY_Controller {
         $row = $query->row_array();
 
 
-        if (isset($row) AND ! is_null($row['stred'])) {
-            $point = geoPHP::load($row['stred'], 'wkt');
+        if (isset($row) and ! is_null($row['center'])) {
+            $point = geoPHP::load($row['center'], 'wkt');
             $centX = $point->getX();
             $centY = $point->getY();
             $data['center'] = "[$centY , $centX]";
@@ -89,5 +88,4 @@ class Uvod extends MY_Controller {
         $this->load->view('uvod_view', $data);
         $this->load->view('zaklad_konec_view', $data);
     }
-
 }

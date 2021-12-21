@@ -1,7 +1,9 @@
--- Vymyslete a vepiště níže vlastní SQL dotaz, který bude zajímavým způsobem 
--- (!!!dotazy 09, 10, 11 budou významově originální, ne jen vzájemné doplňky!!!)
--- pomocí prostorových fukncí filtrovat body nálezů vůči polygonům jezer v tabulce jezera. 
--- Nápověda: další tabulku (např. jezera) nemusíte nutně JOINovat, stačí ji přidat s čárkou: ... FROM tabulka1, tabulka2 ...
--- V SELECTu musí být povinně použity tyto položky:
--- gbifID, scientificName, ST_AsText(souradnice) AS souradniceWKT, souradnice, geo_poly
--- Zdůvodněte zde do poznámky, co je cílem Vámi navrhnutého SQL dotazu.
+-- Propose and enter your own SQL query below, which will be 
+-- (!!! queries 09, 10, 11 will be semantically different, not just mutual additions !!!) 
+-- using spatial functions to filter the points of occurrences in relation to the lake polygon(s) in the lakes table.
+-- Hint: you don't necessarily need to JOIN another table (eg. lakes), just add it with a comma: ... FROM table1, table2 ...
+-- The following items must be used in SELECT:
+-- gbifID, scientificName, ST_AsText(coordinates) AS coordinatesWKT, coordinates, geo_poly
+-- The proposed query will be required to use at least one ST_ function from each of these two links:
+-- https://mariadb.com/kb/en/library/geometry-relations/ a https://mariadb.com/kb/en/library/geometry-constructors/
+-- Justify here in the note what is the goal of your proposed SQL query.

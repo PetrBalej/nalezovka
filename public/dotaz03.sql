@@ -1,11 +1,11 @@
--- Níže vložte SQL dotaz, jehož cílem je získání centroidu z obálky všech záznamů (pro zobrazení středu mapy na webu) z tabulky event
--- Postupně na sebe budete "nabalovat" (uzavírat do sebe) následující funkce v uvedeném pořadí nad sloupcem souradnice:
--- 1) sloupec souradnice vložte do ST_AsText: ST_AsText(souradnice)
--- 2) výraz z bodu 1) vložte do GROUP_CONCAT(): GROUP_CONCAT(ST_AsText(souradnice))
--- 3) výraz z bodu 2) vložte do ST_GeomFromText(): následující body již doplňte sami podle předchozího vzoru
--- 4) výraz z bodu 3) vložte do ST_Envelope(): ...
--- 5) výraz z bodu 4) vložte do ST_Centroid(): ...
--- 6) výraz z bodu 5) vložte do ST_AsText: ...
--- 7) výraz z bodu 6) použijte do SELECTu a nastavte mu alias: AS stred
--- 8) dokončete SQL dotaz z bodu 7) přidáním tabulky: FROM event
+-- Enter an SQL query below, the aim of which is to get the centroid from the envelope of all records (to display the center of the map/region on the web) from the event table.
+-- Gradually, you will "pack" (close in) the following functions in the order listed, starting with the coordinate column:
+-- 1) enter the coordinates column into ST_AsText: ST_AsText(coordinates)
+-- 2) enter the expression from 1) into GROUP_CONCAT(): GROUP_CONCAT(ST_AsText(coordinates))
+-- 3) enter the expression from 2) into ST_GeomFromText(): ... follow the previous pattern
+-- 4) enter the expression from 3) in ST_Envelope(): ...
+-- 5) enter the expression from 4) into ST_Centroid(): ...
+-- 6) enter the expression from 5) in ST_AsText(): ...
+-- 7) use the expression from 6) in SELECT clause and set it alias: AS center
+-- 8) complete the SQL query from 7) Add a table: FROM event
 

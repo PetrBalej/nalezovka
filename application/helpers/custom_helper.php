@@ -84,7 +84,7 @@ function GBIF_hypertext($array = array())
             // occurence: https://www.gbif.org/occurrence/29888211
             $array[$key] = "<a href='https://www.gbif.org/occurrence/" . $row . "'>" . $row . "</a>";
         }
-        if ($key == "souradnice") {
+        if ($key == "coordinates") {
             // navíc převod souřadnic z BIN do stringu
             $array[$key] = point_BIN_text($row);
         }
@@ -119,7 +119,7 @@ function GBIF_array_row_table($array = array(), $table_atr = "class='trida' styl
     return $output;
 }
 
-// kontrola funkčnosti vložených SQL dotazů
+// kontrola funkčnosti vložených SQL queryů
 function validate_query_result($sqls, $sqls_selected = array())
 {
     $CI = & get_instance();
@@ -133,27 +133,27 @@ function validate_query_result($sqls, $sqls_selected = array())
 
 
     $k[1] = "taxonKey|scientificName|taxon|ORDER BY";
-    $k[2] = "*|ST_AsText|souradnice|souradniceWKT|event|INNER|JOIN|occurrence|ON|event|gbifID|occurrence|event_gbifID|taxon|taxon_taxonKey|taxonKey";
-    $k[3] = "ST_AsText|ST_Centroid|ST_Envelope|ST_GeomFromText|GROUP_CONCAT|ST_AsText|souradnice|stred|event";
-    $k[5] = "ORDER|BY|ST_Y|souradnice|DESC|LIMIT"; // sever
-    $k[6] = "ORDER|BY|ST_Y|souradnice|ASC|LIMIT"; // jih
-    $k[7] = "ORDER|BY|ST_X|souradnice|ASC|LIMIT"; // západ
-    $k[8] = "ORDER|BY|ST_X|souradnice|DESC|LIMIT"; // východ
-    $k[9] = "souradniceWKT|ST_|souradnice|gbifID";
-    $k[10] = "souradniceWKT|ST_|souradnice|gbifID|geo_poly";
-    $k[11] = "souradniceWKT|ST_|souradnice|gbifID|geo_line";
+    $k[2] = "*|ST_AsText|coordinates|coordinatesWKT|event|INNER|JOIN|occurrence|ON|event|gbifID|occurrence|event_gbifID|taxon|taxon_taxonKey|taxonKey";
+    $k[3] = "ST_AsText|ST_Centroid|ST_Envelope|ST_GeomFromText|GROUP_CONCAT|ST_AsText|coordinates|center|event";
+    $k[5] = "ORDER|BY|ST_Y|coordinates|DESC|LIMIT"; // sever
+    $k[6] = "ORDER|BY|ST_Y|coordinates|ASC|LIMIT"; // jih
+    $k[7] = "ORDER|BY|ST_X|coordinates|ASC|LIMIT"; // západ
+    $k[8] = "ORDER|BY|ST_X|coordinates|DESC|LIMIT"; // východ
+    $k[9] = "coordinatesWKT|ST_|coordinates|gbifID";
+    $k[10] = "coordinatesWKT|ST_|coordinates|gbifID|geo_poly";
+    $k[11] = "coordinatesWKT|ST_|coordinates|gbifID|geo_line";
     foreach ($sqls as $key => $value) {
         if ($key == 4) {
             if (strtolower(trim_sql_comments($value)) != "st_distance") {
-                show_error("<p>The (correct) SQL function for determining the distance between two geometries is not specified!</p><p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                show_error("<p>The (correct) SQL function for determining the distance between two geometries is not specified!</p><p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>query" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
         } elseif ($key == 5 or $key == 6 or $key == 7 or $key == 8) {
             if (substr(trim(strtolower(trim_sql_comments($value))), 0, 8) != "order by") {
-                show_error("<p>The (correct) SQL function for finding The MOST- (N/S/E/W) coordinate is not specified!</p><p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                show_error("<p>The (correct) SQL function for finding The MOST- (N/S/E/W) coordinate is not specified!</p><p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>query" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
 
             if (!$CI->db->simple_query(trim_sql_comments($CI->public_sql[2] . " " . trim_sql_comments($value)))) {
-                show_error("<p>The (correct) SQL function for finding The MOST- (N/S/E/W) coordinate is not specified!</p>" . "<b>SQL:</b><code>" . $value . "</code>" . "<b>Error:</b><code>" . print_r($CI->db->error(), true) . "</code>" . "<p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                show_error("<p>The (correct) SQL function for finding The MOST- (N/S/E/W) coordinate is not specified!</p>" . "<b>SQL:</b><code>" . $value . "</code>" . "<b>Error:</b><code>" . print_r($CI->db->error(), true) . "</code>" . "<p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>query" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
 
             $missing = explode("|", $k[$key]);
@@ -166,12 +166,12 @@ function validate_query_result($sqls, $sqls_selected = array())
                 }
             }
             if (!empty($missing_matched)) {
-                show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>One of the following attributes / expressions is missing in the SQL query:</b><code>" . implode(", ", $missing_matched) . "</code>", 404, "Error in SQL query no. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>One of the following attributes / expressions is missing in the SQL query:</b><code>" . implode(", ", $missing_matched) . "</code>", 404, "Error in SQL query no. " . $key . " v public/<b>query" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
         } else {
             if (!empty(trim_sql_comments($value))) {
                 if (!$CI->db->simple_query(trim_sql_comments($value))) {
-                    show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>Error:</b><code>" . print_r($CI->db->error(), true) . "</code>" . "<p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                    show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>Error:</b><code>" . print_r($CI->db->error(), true) . "</code>" . "<p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>query" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
                 }
             }
             $missing = explode("|", $k[$key]);
@@ -184,7 +184,7 @@ function validate_query_result($sqls, $sqls_selected = array())
                 }
             }
             if (!empty($missing_matched)) {
-                show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>One of the following attributes / expressions is missing in the SQL query:</b><code>" . implode(", ", $missing_matched) . "</code>", 404, "Error in SQL query no. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>One of the following attributes / expressions is missing in the SQL query:</b><code>" . implode(", ", $missing_matched) . "</code>", 404, "Error in SQL query no. " . $key . " v public/<b>query" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
         }
     }

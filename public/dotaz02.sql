@@ -1,5 +1,5 @@
--- Níže zapište tento SQL dotaz:
--- SELECT bude obsahovat: *, ST_AsText(souradnice) AS souradniceWKT
--- ve FROM budete přes INNER JOIN spojovat:
---  1)  tabulku event s tabulkou occurrence přes event.gbifID=occurrence.event_gbifID
---  2)  a následně  tabulku occurence s tabulkou taxon přes occurrence.taxon_taxonKey=taxon.taxonKey 
+-- Enter an SQL query below: 
+-- SELECT will contain: *, ST_AsText (coordinates) AS coordinatesWKT 
+-- in FROM clause you will connect via INNER JOIN:
+--   1) event table with occurrence table via event.gbifID=occurrence.event_gbifID
+--   2) and then the occurence table with the taxon table via occurrence.taxon_taxonKey=taxon.taxonKey

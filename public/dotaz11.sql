@@ -1,6 +1,8 @@
--- Vymyslete a vepiště níže vlastní SQL dotaz, který bude zajímavým způsobem 
--- (!!!dotazy 09, 10, 11 budou významově originální, ne jen vzájemné doplňky!!!)
--- pomocí prostorových fukncí filtrovat body nálezů vůči liniím řek z tabulky reky. 
--- V SELECTu musí být povinně použity tyto položky:
--- gbifID, scientificName, ST_AsText(souradnice) AS souradniceWKT, souradnice, geo_line
--- Zdůvodněte zde do poznámky, co je cílem Vámi navrhnutého SQL dotazu.
+-- Propose and enter your own SQL query below, which will be 
+-- (!!! queries 09, 10, 11 will be semantically different, not just mutual additions !!!) 
+-- using spatial functions to filter the points of occurrences in relation to the river lines(s) in the rivers table.
+-- The following items must be used in SELECT:
+-- gbifID, scientificName, ST_AsText(coordinates) AS coordinatesWKT, coordinates, geo_line
+-- The proposed query will be required to use at least one ST_ function from each of these two links:
+-- https://mariadb.com/kb/en/library/geometry-relations/ a https://mariadb.com/kb/en/library/geometry-constructors/
+-- Justify here in the note what is the goal of your proposed SQL query.

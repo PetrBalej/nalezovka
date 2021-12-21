@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `month` smallint(2) DEFAULT NULL,
   `year` smallint(4) DEFAULT NULL,
   `institutionCode` varchar(50) NOT NULL,
-  `souradnice` point NOT NULL,
+  `coordinates` point NOT NULL,
   PRIMARY KEY (`gbifID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

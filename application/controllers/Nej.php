@@ -1,17 +1,18 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Nej extends MY_Controller {
-
-    public function __construct() {
+class Nej extends MY_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
-        validate_query_result($this->public_sql, Array(2, 3, 5, 6, 7, 8));
+        validate_query_result($this->public_sql, array(2, 3, 5, 6, 7, 8));
     }
 
 
-    public function index() {
-
+    public function index()
+    {
         $nej_popis = array(5 => 'nejSevernější', 'nejJižnější', 'nejZápadnější', 'nejVýchodnější');
 
         for ($i = 5; $i <= 8; $i++) {
@@ -22,7 +23,7 @@ class Nej extends MY_Controller {
         //print_r($nalezy);
 
         if (empty($nalezy)) {
-            show_error("", 404, "SQL dotaz vrátil prázdný výsledek: 0 záznamů!");
+            show_error("", 404, "SQL query returned empty result: 0 rows!");
         }
 
         // načtení knihovny geoPHP
@@ -33,9 +34,9 @@ class Nej extends MY_Controller {
 
         foreach ($nalezy as $key => $row) {
             $geojson .= '{"type": "Feature", "geometry":';
-            $point = geoPHP::load($row['souradniceWKT'], 'wkt');
+            $point = geoPHP::load($row['coordinatesWKT'], 'wkt');
             $geojson .= $point->out('json');
-            $geojson .= ',"properties": {"speciesName": "<b>' . $nej_popis[$key] . '</b>: <a href=\"/nalezovka/index.php/detail/index/' . $row['gbifID'] . '\" target=\"_blank\">' . $row['scientificName'] . ' (gbifID: ' . $row['gbifID'] . ')</a>"}},';
+            $geojson .= ',"properties": {"speciesName": "<b>' . $nej_popis[$key] . '</b>: <a href=\"' . site_url() . '/detail/index/' . $row['gbifID'] . '\" target=\"_blank\">' . $row['scientificName'] . ' (gbifID: ' . $row['gbifID'] . ')</a>"}},';
         }
         $geojson .= ']}';
 
@@ -46,8 +47,8 @@ class Nej extends MY_Controller {
         $row = $query->row_array();
 
 
-        if (isset($row) AND ! is_null($row['stred'])) {
-            $point = geoPHP::load($row['stred'], 'wkt');
+        if (isset($row) and ! is_null($row['center'])) {
+            $point = geoPHP::load($row['center'], 'wkt');
             $centX = $point->getX();
             $centY = $point->getY();
             $data['center'] = "[$centY , $centX]";
@@ -60,5 +61,4 @@ class Nej extends MY_Controller {
         $this->load->view('nej_view', $data);
         $this->load->view('zaklad_konec_view', $data);
     }
-
 }

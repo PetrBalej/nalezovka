@@ -60,8 +60,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         <div id="container">
 
-            <h1>Chybně vyplněné přihlašovací údaje do databáze NEBO syntaktická chyba v SQL dotazu!</h1>
-            <p>Zkontrolujte konfiguraci v application\config\database.php nebo SQL dotaz podle níže uvedené chyby.</p>
+            <h1>Incorrec database credentials OR syntax error in SQL query!</h1>
+            <p>Check the configuration in the application\config\database.php or SQL query according to the error below.</p>
             <h1><?php echo $heading; ?></h1>
             <?php echo $message; ?>
 

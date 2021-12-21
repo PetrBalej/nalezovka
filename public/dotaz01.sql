@@ -1,4 +1,4 @@
--- Níže zapište jednoduchý SQL dotaz ve kterém:
--- vyselektujete sloupce: taxonKey, scientificName 
--- z tabulky taxon 
--- a seřadíte podle scientificName
+-- Enter a simple SQL query below in which:
+-- you select the columns: taxonKey, scientificName 
+-- from the table taxon 
+-- and sort by scientificName

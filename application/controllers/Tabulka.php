@@ -74,7 +74,7 @@ class Tabulka extends MY_Controller {
         $data['pocet_nalezu'] = $total_rows->num_rows();
 
         if (empty($nalezy)) {
-            show_error("", 404, "SQL dotaz vrátil prázdný výsledek: 0 záznamů!");
+            show_error("", 404, "SQL query returned empty result: 0 rows!");
         }
 
         $this->table->set_heading(array_keys($nalezy[0]));

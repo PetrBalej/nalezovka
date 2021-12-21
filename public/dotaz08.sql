@@ -1,4 +1,4 @@
--- Funkce ST_X() a ST_Y() ze sloupce protorového typu POINT (event.souradnice) získávají příslušnou souřadnici (Y - latitude; X - longitude)
--- Napište níže část SQL dotazu k seřazení záznamů podle souřadnice k získání jednoho _nejVÝCHODNĚJŠÍHO_ záznamu
--- Povinně uvádějte způsob řazení podle ASC nebo DESC.
--- příklad: ORDER BY ST_Y(souradnice) DESC LIMIT 0,1
+-- The ST_X() and ST_Y() functions returns from the POINT type column (event.coordinates) the corresponding coordinates (Y - latitude; X - longitude)
+-- Type below the ORDER BY part of an SQL query to sort the records by coordinate to get one _easternmost_ record
+-- It is mandatory to specify the ASC or DESC sorting method.
+-- Example: ORDER BY ST_Y(coordinates) DESC LIMIT 0,1

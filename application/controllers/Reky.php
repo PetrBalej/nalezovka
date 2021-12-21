@@ -24,7 +24,7 @@ class Reky extends MY_Controller
         $data['pocet_nalezu'] = $query->num_rows();
 
         if (empty($nalezy)) {
-            show_error("", 404, "SQL dotaz vrátil prázdný výsledek: 0 záznamů!");
+            show_error("", 404, "SQL query returned empty result: 0 rows!");
         }
 
         // načtení knihovny geoPHP
@@ -35,9 +35,9 @@ class Reky extends MY_Controller
 
         foreach ($nalezy as $row) {
             $geojson .= '{"type": "Feature", "geometry":';
-            $point = geoPHP::load($row['souradniceWKT'], 'wkt');
+            $point = geoPHP::load($row['coordinatesWKT'], 'wkt');
             $geojson .= $point->out('json');
-            $geojson .= ',"properties": {"speciesName": "<a href=\"/nalezovka/index.php/detail/index/' . $row['gbifID'] . '\" target=\"_blank\">' . $row['scientificName'] . ' (gbifID: ' . $row['gbifID'] . ')</a>"}},';
+            $geojson .= ',"properties": {"speciesName": "<a href=\"' . site_url() . '/detail/index/' . $row['gbifID'] . '\" target=\"_blank\">' . $row['scientificName'] . ' (gbifID: ' . $row['gbifID'] . ')</a>"}},';
         }
         $geojson .= ']}';
 
@@ -45,13 +45,13 @@ class Reky extends MY_Controller
 
         // získání obálky a následně centroidu ze všech souřadnic v tabulce event
 
-        $sql_add = preg_replace("/\sFROM\s/m", ", ST_AsText(ST_Centroid(ST_Envelope(ST_GeomFromText( CONCAT( 'GEOMETRYCOLLECTION(', GROUP_CONCAT(ST_AsText(souradnice)), ')' ) )))) AS stred FROM ", trim_sql_comments($this->public_sql[11]));
+        $sql_add = preg_replace("/\sFROM\s/m", ", ST_AsText(ST_Centroid(ST_Envelope(ST_GeomFromText( CONCAT( 'GEOMETRYCOLLECTION(', GROUP_CONCAT(ST_AsText(coordinates)), ')' ) )))) AS center FROM ", trim_sql_comments($this->public_sql[11]));
         $query = $this->db->query($sql_add);
         $row = $query->row_array();
 
 
-        if (isset($row) and ! is_null($row['stred'])) {
-            $point = geoPHP::load($row['stred'], 'wkt');
+        if (isset($row) and ! is_null($row['center'])) {
+            $point = geoPHP::load($row['center'], 'wkt');
             $centX = $point->getX();
             $centY = $point->getY();
             $data['center'] = "[$centY , $centX]";

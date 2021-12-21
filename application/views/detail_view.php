@@ -10,7 +10,7 @@ echo GBIF_array_row_table($nalez, "class='table table-bordered table-sm ' style=
 
 <h3>Nejbližší nálezy v okolí</h3>
 
-<code>-- použitý SQL kód:
+<code>-- SQL code used:
     <?= $okolni_sql ?></code>
 <?php
 echo $okolni;
