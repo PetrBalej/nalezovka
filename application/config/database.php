@@ -74,15 +74,16 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 /* 
- * Je-li v rámci WAMP serveru nainstalována zároveň MySQL i MariaDB je třeba pro 
- * připojení k MariaDB zadat i port (3307) do hostname (viz konfig. pole níže):
- *  'hostname' => 'localhost:3307' 
- * (MySQL použije automaticky výchozí port (3306), ikdyž není vyplněn.)
+ * If both MySQL and MariaDB are installed within the WAMP server, you must also enter 
+ * the port number (3307) in the hostname to connect to MariaDB 
+ * (see the configuration field below):
+ * 'hostname' => 'localhost:3307'
+ * (MySQL will automatically use the default port (3306), even if it is not assigned.)
  * 
  */
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost', /* 'localhost:cislo_portu' */
+	'hostname' => 'localhost', /* 'localhost:port_number' */
 	'username' => 'root',
 	'password' => 'heslo',
 	'database' => 'geodb',
