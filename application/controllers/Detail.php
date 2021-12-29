@@ -21,7 +21,7 @@ class Detail extends MY_Controller {
         }
 
         // výběr záznamů podle ID nálezu
-        $query = $this->db->query($this->public_sql[2] . $where . ' LIMIT 0,1');
+        $query = $this->db->query(trim_sql_comments($this->public_sql[2]) . $where . ' LIMIT 0,1');
         $nalez = $query->row_array();
         // předání do view        
         $data['nalez'] = $nalez;
