@@ -35,7 +35,7 @@ function trim_sql_comments($sql)
     //$extractedComments = array_filter( $comments[ 3 ] );
     //var_dump( $uncommentedSQL, $extractedComments );
 
-    return str_ireplace("\r", ' ', str_ireplace("\n", ' ', trim(preg_replace($sqlComments, '$1', $sql))));
+    return rtrim(str_ireplace("\r", ' ', str_ireplace("\n", ' ', trim(preg_replace($sqlComments, '$1', $sql)))), ";");
 }
 
 // https://stackoverflow.com/a/29711778

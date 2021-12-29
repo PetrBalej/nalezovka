@@ -41,7 +41,7 @@ class Tabulka extends MY_Controller {
             $where = "";
         }
         // celkový počet záznamů
-        $total_rows = $this->db->query($this->public_sql[2] . $where);
+        $total_rows = $this->db->query(trim_sql_comments($this->public_sql[2]) . $where);
 
 
         $config['full_tag_open'] = '<ul class="pagination mt-1">';
@@ -68,7 +68,7 @@ class Tabulka extends MY_Controller {
         $data['strankovani'] = $this->pagination->create_links();
 
         // výběr záznamů (případně omezený taxonem)
-        $query = $this->db->query($this->public_sql[2] . $where . ' LIMIT ' . intval($page_number) . ',' . intval($config['per_page']));
+        $query = $this->db->query(trim_sql_comments($this->public_sql[2]) . $where . ' LIMIT ' . intval($page_number) . ',' . intval($config['per_page']));
         $nalezy = $query->result_array();
 
         $data['pocet_nalezu'] = $total_rows->num_rows();
