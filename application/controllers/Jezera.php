@@ -46,7 +46,7 @@ class Jezera extends MY_Controller
         // získání obálky a následně centroidu ze všech souřadnic v tabulce event
 
 
-        $sql_add = preg_replace("/\sFROM\s/m", ", ST_AsText(ST_Centroid(ST_Envelope(ST_GeomFromText( CONCAT( 'GEOMETRYCOLLECTION(', GROUP_CONCAT(ST_AsText(souradnice)), ')' ) )))) AS stred FROM ", trim_sql_comments($this->public_sql[10]));
+        $sql_add = preg_replace("/\sFROM\s/m", ", ST_AsText(ST_Centroid(ST_Envelope(ST_GeomFromText( CONCAT( 'GEOMETRYCOLLECTION(', GROUP_CONCAT(ST_AsText(souradnice)), ')' ) )))) AS stred FROM ", trim_sql_comments($this->public_sql[10]), 1);
         $query = $this->db->query($sql_add);
         $row = $query->row_array();
 
