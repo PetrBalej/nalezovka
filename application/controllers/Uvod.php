@@ -70,7 +70,8 @@ class Uvod extends MY_Controller
         $data['geojson'] = $geojson;
 
         // získání obálky a následně centroidu ze všech souřadnic v tabulce event
-        $query = $this->db->query($this->public_sql[3]);
+        $sql_add = explode("GROUP_CONCAT", trim_sql_comments($this->public_sql[3]));
+        $query = $this->db->query($sql_add[0] . "CONCAT('GEOMETRYCOLLECTION(', GROUP_CONCAT(ST_AsText(coordinates)), ')'))))) AS center FROM event");
         $row = $query->row_array();
 
 
