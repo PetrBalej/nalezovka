@@ -170,8 +170,16 @@ function validate_query_result($sqls, $sqls_selected = array())
             }
         } else {
             if (!empty(trim_sql_comments($value))) {
-                if (!$CI->db->simple_query(trim_sql_comments($value))) {
-                    show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>Error:</b><code>" . print_r($CI->db->error(), true) . "</code>" . "<p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>query" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                if ($key == 3) {
+                    $sql_add = explode("GROUP_CONCAT", trim_sql_comments($value));
+                    $query = $sql_add[0] . "CONCAT('GEOMETRYCOLLECTION(', GROUP_CONCAT(ST_AsText(souradnice)), ')'))))) AS stred FROM event";
+                    if (!$CI->db->simple_query(trim_sql_comments($query))) {
+                        show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>Error:</b><code>" . print_r($CI->db->error(), true) . "</code>" . "<p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>query" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                    }
+                } else {
+                    if (!$CI->db->simple_query(trim_sql_comments($value))) {
+                        show_error("<b>SQL:</b><code>" . $value . "</code>" . "<b>Error:</b><code>" . print_r($CI->db->error(), true) . "</code>" . "<p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>query" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
+                    }
                 }
             }
             $missing = explode("|", $k[$key]);
