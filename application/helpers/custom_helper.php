@@ -219,7 +219,7 @@ function GBIF_prepare($col_name, $csv_row, $table_col_types)
     if ($type == "varchar") {
         $res_value = mb_substr($value, 0, $range);
     } elseif ($type == "int" or $type == "smallint") {
-        $res_value = mb_substr(intval($value), 0, $range);
+        $res_value = mb_substr(floatval($value), 0, $range);
     } elseif ($type == "decimal") {
         $res_value = round(floatval($value), explode(",", $range)[1]);
     } else {
