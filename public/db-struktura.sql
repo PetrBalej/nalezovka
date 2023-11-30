@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `reky` (
 DROP TABLE IF EXISTS `jezera`;
 CREATE TABLE IF NOT EXISTS `jezera` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
-  `name` varchar(14) DEFAULT NULL,
+  `name` varchar(500) DEFAULT NULL,
   `geo_poly` multipolygon NOT NULL,
 
   PRIMARY KEY (`id`)
