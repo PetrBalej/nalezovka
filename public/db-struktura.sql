@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `event`;
 CREATE TABLE IF NOT EXISTS `event` (
-  `gbifID` int(12) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `gbifID` bigint(30) UNSIGNED NOT NULL AUTO_INCREMENT,
   `datasetKey` varchar(50) NOT NULL,
   `countryCode` varchar(3) NOT NULL,
   `locality` varchar(250) NOT NULL,
@@ -49,15 +49,15 @@ CREATE TABLE IF NOT EXISTS `event` (
 
 DROP TABLE IF EXISTS `occurrence`;
 CREATE TABLE IF NOT EXISTS `occurrence` (
-  `id` int(12) NOT NULL AUTO_INCREMENT,
-  `event_gbifID` int(12) UNSIGNED NOT NULL,
+  `id` bigint(30) NOT NULL AUTO_INCREMENT,
+  `event_gbifID` bigint(30) UNSIGNED NOT NULL,
   `occurrenceID` varchar(250) NOT NULL,
   `basisOfRecord` varchar(20) NOT NULL,
   `license` varchar(20) NOT NULL,
   `rightsHolder` varchar(50) NOT NULL,
   `recordedBy` varchar(50) NOT NULL,
   `issue` varchar(250) NOT NULL,
-  `taxon_taxonKey` int(10) DEFAULT NULL,
+  `taxon_taxonKey` bigint(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `event_gbifID` (`event_gbifID`),
   KEY `taxon_taxonKey` (`taxon_taxonKey`)
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `occurrence` (
 
 DROP TABLE IF EXISTS `taxon`;
 CREATE TABLE IF NOT EXISTS `taxon` (
-  `taxonKey` int(12) NOT NULL AUTO_INCREMENT,
+  `taxonKey` bigint(30) NOT NULL AUTO_INCREMENT,
   `kingdom` varchar(50) NOT NULL,
   `phylum` varchar(50) NOT NULL,
   `class` varchar(50) NOT NULL,
