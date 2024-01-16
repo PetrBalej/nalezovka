@@ -152,7 +152,7 @@ function validate_query_result($sqls, $sqls_selected = array())
                 show_error("<p>Není zadána (správná) SQL funkce pro zjištění NEJ- souřadnice!</p><p>Dotaz použit v rámci controlleru: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Chyba v SQL dotazu č. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
 
-            if (!$CI->db->simple_query(trim_sql_comments($CI->public_sql[2] . " " . trim_sql_comments($value)))) {
+            if (!$CI->db->simple_query(trim_sql_comments($CI->public_sql[2]) . " " . trim_sql_comments($value))) {
                 show_error("<p>Není zadána (správná) SQL funkce pro zjištění NEJ- souřadnice!</p>" . "<b>SQL:</b><code>" . $value . "</code>" . "<b>Error:</b><code>" . print_r($CI->db->error(), true) . "</code>" . "<p>Dotaz použit v rámci controlleru: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Chyba v SQL dotazu č. " . $key . " v public/<b>dotaz" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
 
