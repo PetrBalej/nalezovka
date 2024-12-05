@@ -1,0 +1,2 @@
+-- Write below an SQL function that is used to determine the distance between two geometries.
+-- Please enter only the function name, eg: ST_OVERLAPS

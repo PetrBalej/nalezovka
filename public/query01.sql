@@ -1,0 +1,4 @@
+-- Enter a simple SQL query below in which:
+-- you select the columns: taxonKey, scientificName 
+-- from the table taxon 
+-- and sort by scientificName

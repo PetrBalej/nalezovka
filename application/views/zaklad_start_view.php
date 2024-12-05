@@ -121,25 +121,26 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="<?php echo site_url(); ?>/tabulka">Tabulka<span
+                            href="<?php echo site_url(); ?>/tabulka">Table<span
                                 class="sr-only">(aktivní)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="<?php echo site_url(); ?>/nej">Nej-
+                            href="<?php echo site_url(); ?>/nej">The
+                            most-
                             N/S/E/W</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="<?php echo site_url(); ?>/prostor">Prostor</a>
+                            href="<?php echo site_url(); ?>/prostor">Spatial</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="<?php echo site_url(); ?>/jezera">Jezera</a>
+                            href="<?php echo site_url(); ?>/jezera">Lakes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="<?php echo site_url(); ?>/reky">Řeky</a>
+                            href="<?php echo site_url(); ?>/reky">Rivers</a>
                     </li>
 
 

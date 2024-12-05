@@ -1,0 +1,8 @@
+-- Propose and enter your own SQL query below, which will be 
+-- (!!! queries 09, 10, 11 will be semantically different, not just mutual additions !!!) 
+-- using spatial functions to filter the points of occurrences in relation to the river lines(s) in the rivers table.
+-- The following items must be used in SELECT:
+-- gbifID, scientificName, ST_AsText(coordinates) AS coordinatesWKT, coordinates, geo_line
+-- The proposed query will be required to use at least one ST_ function from each of these two links:
+-- https://mariadb.com/kb/en/library/geometry-relations/ a https://mariadb.com/kb/en/library/geometry-constructors/
+-- Justify here in the note what is the goal of your proposed SQL query.
