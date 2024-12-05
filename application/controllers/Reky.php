@@ -38,6 +38,7 @@ class Reky extends MY_Controller
             $point = geoPHP::load($row['coordinatesWKT'], 'wkt');
             $geojson .= $point->out('json');
             $geojson .= ',"properties": {"speciesName": "<a href=\"' . site_url() . '/detail/index/' . $row['gbifID'] . '\" target=\"_blank\">' . $row['scientificName'] . ' (gbifID: ' . $row['gbifID'] . ')</a>"}},';
+            $geojson .= ',"properties": {"speciesName": "<a href=\"' . site_url() . '/detail/index/' . $row['gbifID'] . '\" target=\"_blank\">' . $row['scientificName'] . ' (gbifID: ' . $row['gbifID'] . ')</a>"}},';
         }
         $geojson .= ']}';
 

@@ -37,6 +37,7 @@ class Nej extends MY_Controller
             $point = geoPHP::load($row['coordinatesWKT'], 'wkt');
             $geojson .= $point->out('json');
             $geojson .= ',"properties": {"speciesName": "<b>' . $nej_popis[$key] . '</b>: <a href=\"' . site_url() . '/detail/index/' . $row['gbifID'] . '\" target=\"_blank\">' . $row['scientificName'] . ' (gbifID: ' . $row['gbifID'] . ')</a>"}},';
+            $geojson .= ',"properties": {"speciesName": "<b>' . $nej_popis[$key] . '</b>: <a href=\"' . site_url() . '/detail/index/' . $row['gbifID'] . '\" target=\"_blank\">' . $row['scientificName'] . ' (gbifID: ' . $row['gbifID'] . ')</a>"}},';
         }
         $geojson .= ']}';
 
