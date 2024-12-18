@@ -153,7 +153,7 @@ function validate_query_result($sqls, $sqls_selected = array())
                 show_error("<p>The (correct) SQL function for finding The MOST- (N/S/E/W) coordinate is not specified!</p><p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>query" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
 
-            if (!$CI->db->simple_query(trim_sql_comments($CI->public_sql[2] . " " . trim_sql_comments($value)))) {
+            if (!$CI->db->simple_query(trim_sql_comments($CI->public_sql[2]) . " " . trim_sql_comments($value))) {
                 show_error("<p>The (correct) SQL function for finding The MOST- (N/S/E/W) coordinate is not specified!</p>" . "<b>SQL:</b><code>" . $value . "</code>" . "<b>Error:</b><code>" . print_r($CI->db->error(), true) . "</code>" . "<p>Query used within the controller: <i>application/controllers/<b>" . ucfirst($CI->router->fetch_class()) . "</b>.php</i></p>", 404, "Error in SQL query no. " . $key . " v public/<b>query" . str_pad($key, 2, "0", STR_PAD_LEFT) . ".sql</b>");
             }
 
